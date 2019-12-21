@@ -8,22 +8,25 @@ class Novel:
 	def __init__(self):
 		self.session = requests.session()
 		self.session.headers["user-agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
-		
+	
+	#获取章节	
 	def GetChapters(self, url):
 		r = self.session.get(url)
 		r.encoding = chardet.detect(r.content).get("encoding", "utf-8")
 		html = etree.HTML(r.text)
 		for item in html.xpath("//dl/dd/a"):
 			yield item.attrib["title"], url + item.attrib["href"]
-			
+	
+	#保存文件		
 	def SaveFile(self,filename,str):
 		with open(filename,'a',encoding='utf-8') as f:
 			f.write(str)
-			
+	#保存音频		
 	def SaveMp3(self,filename,str):
 		with open(filepath+'.mp3', "ab") as fp:
 			fp.write(str)
-			
+	
+	#获取内容		
 	def GetContent(self, url, title):
 		r = self.session.get(url)
 		yuyin = BaiDuYuYin()
@@ -39,7 +42,7 @@ class Novel:
 				content = yuyin.SaveSound(title,line)
 			return lstr	
 			
-			
+	#获取小说		
 	def GetNovel(self):
 		weburl = "http://www.biquge.info/61_61256/"
 		num = 1
