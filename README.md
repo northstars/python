@@ -5,6 +5,8 @@
 pip install pyaudio
 pip install wave
 pip install chardet
+pip install pyaudio
+pip install wave
 
 import requests
 import json
@@ -27,6 +29,8 @@ import lxml
 	GetChapters 	获取章节
 	GetContent		获取内容
 	GetNovel		获取小说内容
+
+	record.py 录音并保存为音频文件
 
 
 
